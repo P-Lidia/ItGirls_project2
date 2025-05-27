@@ -1,4 +1,4 @@
 package ru.itgirls.core.service;
 
-public class CompanyService {
+public interface CompanyService {
 }

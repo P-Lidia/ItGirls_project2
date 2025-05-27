@@ -1,4 +1,4 @@
 package ru.itgirls.core.entity;
 
-public class Client {
+public class Customer {
 }

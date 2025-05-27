@@ -1,4 +1,4 @@
-package ru.itgirls.core.service;
+package ru.itgirls.web.service;
 
-public interface ProductService {
+public class ProductService {
 }
