@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements EmailService {
 
-    private final Map<String, Long> keysForLink = new ConcurrentHashMap<>();
+    private Map<String, Long> keysForLink = new ConcurrentHashMap<>();
     private final EmailMessage emailMessage;
     private final JavaMailSender mailSender;
     private final UserRepository userRepository;

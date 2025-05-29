@@ -1,9 +1,9 @@
 package ru.itgirls.core.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class UserActivationDto {
     private Long id;
