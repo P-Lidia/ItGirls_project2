@@ -11,6 +11,9 @@ public class EmailMessage {
     @Value("${custom.mail.from}")
     private String from;
 
-    @Value("${custom.mail.message-template}")
-    private String template;
+    @Value("${custom.mail.registration-template}")
+    private String registrationTemplate;
+
+    @Value("${custom.mail.activation-template}")
+    private String activationTemplate;
 }
