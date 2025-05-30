@@ -1,5 +1,6 @@
 package ru.itgirls.core.dto;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -14,8 +15,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class CompanyCreateDto {
     @Size(min = 2)
-    @NotBlank(message = "Необходимо указать название компании")
+    @NotBlank(message = "Please enter the company name")
     private String name;
-    @NotNull(message = "Необходимо указать произведённый товар")
+    @NotNull(message = "Please enter the produced product")
+    @Valid
     private ProductDto productDto;
 }
