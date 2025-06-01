@@ -13,48 +13,21 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@DaTa
+@builder
+
 public class ProductDto {
 
-    private Long id;
+    @NotBlank  @NotNull private Long id;
 
     @NotNull(message = "Product's name can't be null")
-    @NotEmpty(message = "Product's name can't be empty")
+    @NotBlank(message = "Product's name can't be empty")
     private String name;
 
-    @NotNull(message = "The price is necessary")
+    @NotNull @NotBlank(message = "The price is necessary")
     private BigDecimal price;
 
-    private String description;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }
