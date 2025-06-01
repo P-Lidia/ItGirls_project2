@@ -26,21 +26,25 @@ public class EmailServiceImpl implements EmailService {
     private final UserRepository userRepository;
 
     @Override
-    public void register(UserRegistrationDto userDto) {
+    @Transactional
+    public void register(UserRegistrationDto userRegistrationDto) {
         String activationKey = UUID.randomUUID().toString();
-        sendEmail(userDto.getEmail(), buildRegistrationText(userDto.getName(), activationKey));
-        log.info("Activation email sent to {}", userDto.getEmail());
-        keysForLink.put(activationKey, userDto.getId());
+        sendEmail(
+                userRegistrationDto.getEmail(),
+                buildRegistrationText(userRegistrationDto.getName(), activationKey)
+        );
+        log.info("Activation email sent to {}", userRegistrationDto.getEmail());
+        keysForLink.put(activationKey, userRegistrationDto.getId());
 
         //todo: можно возвращать в контроллер(варианты на подумать):
-        // строку об успехе;
-        // userRegistrationDto(и уже в контроллере оборачивать его в ответ);
-        // или обернуть весь код в try-catch;
+        // 1. строку об успехе;
+        // 2. userRegistrationDto(и уже в контроллере оборачивать его в ответ);
+        // 3. или обернуть весь код в try-catch;
     }
 
     @Override
     @Transactional
-    public void activation(UserActivationDto userActivationDto, String activationKey) {
+    public void activate(UserActivationDto userActivationDto, String activationKey) {
         if (keysForLink.containsKey(activationKey)
                 && keysForLink.get(activationKey).equals(userActivationDto.getId())) {
             User user = userRepository.findById(userActivationDto.getId())

@@ -7,6 +7,6 @@ public interface EmailService {
 
     void register(UserRegistrationDto userRegistrationDto);
 
-    void activation(UserActivationDto userActivationDto, String activationKey);
+    void activate(UserActivationDto userActivationDto, String activationKey);
 
 }
