@@ -1,0 +1,31 @@
+package ru.itgirls.web.feignclients;
+
+import jakarta.validation.Valid;
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.web.bind.annotation.*;
+import ru.itgirls.core.dto.*;
+
+import java.util.List;
+
+@FeignClient(name = "company_core", url = "https://localhost:8081")
+@RequestMapping("/company")
+public interface CompanyFeignClient {
+
+    @GetMapping("/all")
+    List<CompanyDto> getAllCompanies();
+
+    @GetMapping("/id/{id}")
+    CompanyDto getCompanyById(@PathVariable("id") Long id);
+
+    @GetMapping("/name/{name}")
+    CompanyDto getCompanyByName(@PathVariable("name") String name);
+
+    @PostMapping("/create")
+    CompanyDto createCompany(@RequestBody @Valid CompanyCreateDto companyCreateDto);
+
+    @PutMapping("/update")
+    CompanyDto updateCompany(@RequestBody @Valid CompanyUpdateDto companyUpdateDto);
+
+    @DeleteMapping("/delete/{id}")
+    void deleteCompany(@PathVariable("id") Long id);
+}

@@ -3,6 +3,7 @@ package ru.itgirls.core.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.Set;
 
 @AllArgsConstructor
@@ -22,5 +23,5 @@ public class Company {
     private String name;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
-    private Set<Product> products;
+    private List<Product> products;
 }
