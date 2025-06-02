@@ -29,7 +29,7 @@ public class User {
     private UserRole role;
 
     @Column(nullable = false)
-    private boolean enabled = false;
+    private boolean isEnable = false;
 
     @Column(nullable = false, length = 255)
     private String password;
