@@ -11,19 +11,20 @@ import java.math.BigDecimal;
 @Setter
 @Entity
 @Builder
+@Table(name = "product")
 public class Product {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="company_id")
+    @JoinColumn(name = "company_id")
     private Company company;
 }

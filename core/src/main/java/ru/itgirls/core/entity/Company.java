@@ -11,16 +11,16 @@ import java.util.Set;
 @Getter
 @Setter
 @Builder
+@Table(name = "company")
 public class Company {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY,mappedBy="company")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "company")
     private Set<Product> products;
-
 }
