@@ -7,8 +7,7 @@ import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
 @Builder
 @Table(name = "product")
