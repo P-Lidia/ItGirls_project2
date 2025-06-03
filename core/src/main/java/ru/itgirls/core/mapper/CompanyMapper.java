@@ -11,14 +11,11 @@ import ru.itgirls.core.entity.Company;
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses=ProductMapper.class)
+        uses = ProductMapper.class)
 public interface CompanyMapper {
-    CompanyDto companyToDto (Company company);
+    CompanyDto companyToDto(Company company);
 
-    Company dtoToEntity (CompanyDto companyDto);
+    Company dtoToEntity(CompanyDto companyDto);
 
-    Company companyDtoToEntity (CompanyCreateDto companyCreateDto);
-
-
-
+    Company companyDtoToEntity(CompanyCreateDto companyCreateDto);
 }

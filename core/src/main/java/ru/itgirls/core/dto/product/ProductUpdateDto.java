@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.core.entity.Company;
 
 import java.math.BigDecimal;
 
@@ -16,5 +17,5 @@ public class ProductUpdateDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String company;
+    private Company company;
 }
