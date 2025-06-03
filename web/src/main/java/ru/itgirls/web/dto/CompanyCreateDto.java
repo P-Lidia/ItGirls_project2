@@ -1,4 +1,4 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -13,8 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @Builder
-public class CompanyUpdateDto {
-    private Long id;
+public class CompanyCreateDto {
+    @Size(min = 2)
+    @NotBlank(message = "Please enter the company name")
     private String name;
+    @NotNull(message = "Please enter the produced product")
+    @Valid
     private ProductDto productDto;
 }

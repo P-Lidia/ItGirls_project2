@@ -1,10 +1,6 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto;
 
-
-import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +12,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 @Builder
-public class ProductUpdateDto {
+@JsonInclude(JsonInclude.Include.NON_NULL)
+public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;

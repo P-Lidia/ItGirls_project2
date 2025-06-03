@@ -14,10 +14,6 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class CompanyCreateDto {
-    @Size(min = 2)
-    @NotBlank(message = "Please enter the company name")
     private String name;
-    @NotNull(message = "Please enter the produced product")
-    @Valid
     private ProductDto productDto;
 }

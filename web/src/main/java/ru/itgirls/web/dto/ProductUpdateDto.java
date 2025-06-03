@@ -1,4 +1,4 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto;
 
 
 import jakarta.validation.constraints.DecimalMin;
@@ -17,8 +17,12 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class ProductUpdateDto {
-    private Long id;
+    @Size(min = 2)
+    @NotBlank(message = "Please enter the product name")
     private String name;
+    @DecimalMin(value = "0.01", inclusive = true)
+    @NotNull(message = "Please enter the product price")
     private BigDecimal price;
+    @NotBlank(message = "Please enter the product producer")
     private String company;
 }

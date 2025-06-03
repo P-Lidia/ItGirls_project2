@@ -25,4 +25,6 @@ spring:
             enable: true
         debug: true
 
+server:
+  port: 8081
   # сюда же добавить конфигурацию БД
