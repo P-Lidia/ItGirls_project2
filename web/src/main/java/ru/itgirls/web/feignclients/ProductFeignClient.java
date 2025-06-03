@@ -3,7 +3,10 @@ package ru.itgirls.web.feignclients;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import ru.itgirls.web.dto.*;
+import ru.itgirls.web.dto.product.ProductCreateDto;
+import ru.itgirls.web.dto.product.ProductDto;
+import ru.itgirls.web.dto.product.ProductUpdateDto;
+
 import java.util.List;
 
 @FeignClient(name = "product_core", url = "https://localhost:8081")

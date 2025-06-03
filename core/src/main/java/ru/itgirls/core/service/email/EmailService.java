@@ -1,7 +1,7 @@
 package ru.itgirls.core.service.email;
 
-import ru.itgirls.core.dto.UserActivationDto;
-import ru.itgirls.core.dto.UserRegistrationDto;
+import ru.itgirls.core.dto.user.UserActivationDto;
+import ru.itgirls.core.dto.user.UserRegistrationDto;
 
 public interface EmailService {
 

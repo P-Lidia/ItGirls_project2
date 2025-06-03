@@ -1,10 +1,11 @@
-package ru.itgirls.web.dto;
+package ru.itgirls.core.dto.company;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.core.dto.product.ProductDto;
 
 import java.util.List;
 

@@ -3,7 +3,10 @@ package ru.itgirls.web.feignclients;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import ru.itgirls.web.dto.*;
+import ru.itgirls.web.dto.company.CompanyCreateDto;
+import ru.itgirls.web.dto.company.CompanyDto;
+import ru.itgirls.web.dto.company.CompanyUpdateDto;
+
 import java.util.List;
 
 @FeignClient(name = "company_core", url = "https://localhost:8081")

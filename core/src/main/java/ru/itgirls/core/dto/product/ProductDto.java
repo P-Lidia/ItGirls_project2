@@ -1,4 +1,4 @@
-package ru.itgirls.web.dto;
+package ru.itgirls.core.dto.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;

@@ -1,13 +1,10 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.core.dto.company;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.core.dto.product.ProductDto;
 
 @AllArgsConstructor
 @NoArgsConstructor

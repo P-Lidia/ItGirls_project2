@@ -1,4 +1,4 @@
-package ru.itgirls.web.dto;
+package ru.itgirls.web.dto.company;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.web.dto.product.ProductDto;
 
 @AllArgsConstructor
 @NoArgsConstructor

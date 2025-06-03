@@ -1,4 +1,4 @@
-package ru.itgirls.web.dto;
+package ru.itgirls.core.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
