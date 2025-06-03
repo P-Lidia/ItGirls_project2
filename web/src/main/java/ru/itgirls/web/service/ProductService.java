@@ -1,8 +1,13 @@
-package ru.itgirls.core.service;
+package ru.itgirls.web.service;
 
 public interface ProductService {
+    List<ProductDto> getAllProducts();
 
-    public ProductDto createProduct(ProductDto productDto);
-    public ProductDto updateProduct(ProductDto productDto);
-    public ProductDto deleteProduct(ProductDto productDto);
+    Optional<ProductDto> getProductById(Long id);
+
+    ProductDto createProduct(ProductDto productDto);
+
+    ProductDto updateProduct(Long id, ProductDto productDto);
+
+    void deleteProduct(Long id);
 }

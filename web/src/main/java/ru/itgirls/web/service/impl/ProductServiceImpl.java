@@ -1,17 +1,13 @@
-package ru.itgirls.web.service;
-
-import org.springframework.stereotype.Service;
-
-import java.util.List;
+package ru.itgirls.web.service.impl;
 
 @Service
 @RequiredArgsConstructor
 
-public class ProductService implements ProductService{
+public class ProductServiceImpl implements ProductService {
     @Autowired
     private final ProductFeignClient productFeignClient;
 
-    public ProductService(ProductFeignClient productFeignClient) {
+    public ProductServiceImpl(ProductFeignClient productFeignClient) {
         this.productFeignClient = productFeignClient;
     }
 
@@ -35,8 +31,3 @@ public class ProductService implements ProductService{
         return productFeignClient.getAllProducts();
     }
 }
-
-
-
-
-
