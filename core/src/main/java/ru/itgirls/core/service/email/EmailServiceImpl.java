@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.itgirls.core.dto.UserActivationDto;
 import ru.itgirls.core.dto.UserRegistrationDto;
+import ru.itgirls.core.entity.User;
 import ru.itgirls.core.repository.UserRepository;
 
 import java.util.Map;
