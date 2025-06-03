@@ -5,7 +5,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService {
+@RequiredArgsConstructor
+
+public class ProductService implements ProductService{
     @Autowired
     private final ProductFeignClient productFeignClient;
 
