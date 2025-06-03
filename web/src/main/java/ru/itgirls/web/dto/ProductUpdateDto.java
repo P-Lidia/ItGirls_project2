@@ -17,6 +17,7 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class ProductUpdateDto {
+    private Long id;
     @Size(min = 2)
     @NotBlank(message = "Please enter the product name")
     private String name;

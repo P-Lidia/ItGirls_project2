@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class CompanyUpdateDto {
+    private Long id;
     @Size(min = 2)
     @NotBlank(message = "Please enter the company name")
     private String name;
