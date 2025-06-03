@@ -1,4 +1,4 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto.company;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -8,12 +8,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.web.dto.product.ProductDto;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
-public class CompanyCreateDto {
+public class CompanyUpdateDto {
+    private Long id;
     @Size(min = 2)
     @NotBlank(message = "Please enter the company name")
     private String name;

@@ -1,4 +1,4 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto.product;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
