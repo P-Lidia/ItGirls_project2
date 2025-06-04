@@ -1,5 +1,6 @@
 package ru.itgirls.core.service.impl;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.itgirls.core.dto.product.ProductCreateDto;
@@ -22,8 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow();
-        return productMapper.productToDto(product);
+        return productMapper.productToDto(findProductById(id));
     }
 
     @Override
@@ -40,7 +40,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto updateProduct(ProductUpdateDto productUpdateDto) {
-        Product product = productRepository.findById(productUpdateDto.getId()).orElseThrow();
+        Product product = findProductById(productUpdateDto.getId());
         product.setName(productUpdateDto.getName());
         product.setPrice(productUpdateDto.getPrice());
         product.setCompany(productUpdateDto.getCompany());
@@ -56,6 +56,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductDto> getAllProducts() {
         List<Product> products = productRepository.findAll();
-        return products.stream().map(productMapper::productToDto).collect(Collectors.toList());
+        return products.stream()
+                .map(productMapper::productToDto)
+                .collect(Collectors.toList());
+    }
+
+    private Product findProductById(long id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found."));
     }
 }
