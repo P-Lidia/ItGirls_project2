@@ -12,6 +12,7 @@ import java.util.List;
 @Validated
 public class ProductController {
 
+    @Autowired
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -30,8 +31,7 @@ public class ProductController {
     }
 
     @PutMapping("/update")
-    public ProductDto updateProduct(@PathVariable Long id, @Valid @RequestBody ProductDto productDto) {
-        productDto.setId(id);
+    public ProductDto updateProduct( ProductUpdateDto ) {
         return productService.updateProduct(productDto);
     }
 

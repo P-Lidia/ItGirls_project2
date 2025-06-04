@@ -1,7 +1,6 @@
 package ru.itgirls.web.service.impl;
 
 @Service
-@RequiredArgsConstructor
 
 public class ProductServiceImpl implements ProductService {
     @Autowired
@@ -11,8 +10,8 @@ public class ProductServiceImpl implements ProductService {
         this.productFeignClient = productFeignClient;
     }
 
-    public ProductDto createProduct(ProductDto productDto) {
-        return productFeignClient.createProduct(productDto);
+    public ProductDto createProduct(createProductDto createproductDto){
+        return productFeignClient.createProduct(createProductDto);
     }
 
     public ProductDto getProductById(Long id) {
