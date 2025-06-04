@@ -35,7 +35,7 @@
             id bigserial PRIMARY KEY,
             name varchar NOT NULL,
             surname varchar,
-            email varchar NOT NULL,
+            email varchar NOT NULL UNIQUE,
             userRole_id bigint NOT NULL,
             enabled boolean NOT NULL DEFAULT FALSE,
             password varchar(255) NOT NULL,

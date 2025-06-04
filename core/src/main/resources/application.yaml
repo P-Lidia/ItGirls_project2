@@ -14,7 +14,6 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/project_2
     username: postgres
-    password: 28032002
   liquibase:
     change-log: classpath:/db/baseChangelog.xml
 
@@ -33,5 +32,3 @@ spring:
 
 server:
   port: 8081
-
-# сюда же добавить конфигурацию БД
