@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.web.dto.company.CompanyDto;
 
 import java.math.BigDecimal;
 
@@ -17,5 +18,5 @@ public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String company;
+    private CompanyDto companyDto;
 }

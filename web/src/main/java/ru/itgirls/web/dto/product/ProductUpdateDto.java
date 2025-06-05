@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.web.dto.company.CompanyDto;
 
 import java.math.BigDecimal;
 
@@ -25,5 +26,5 @@ public class ProductUpdateDto {
     @NotNull(message = "Please enter the product price")
     private BigDecimal price;
     @NotBlank(message = "Please enter the product producer")
-    private String company;
+    private CompanyDto companyDto;
 }

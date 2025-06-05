@@ -36,11 +36,6 @@ public class EmailServiceImpl implements EmailService {
         );
         log.info("Activation email sent to {}", userRegistrationDto.getEmail());
         keysForLink.put(activationKey, userRegistrationDto.getId());
-
-        //todo: можно возвращать в контроллер(варианты на подумать):
-        // 1. строку об успехе;
-        // 2. userRegistrationDto(и уже в контроллере оборачивать его в ответ);
-        // 3. или обернуть весь код в try-catch;
     }
 
     @Override
