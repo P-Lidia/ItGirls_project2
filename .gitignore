@@ -1,3 +1,10 @@
+target/
+out/
+.idea
+*.iml
+
+/core/src/main/resources/application-secret.yaml
+
 # Compiled class file
 *.class
 
