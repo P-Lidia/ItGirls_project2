@@ -11,4 +11,6 @@ public class UserRegistrationDto {
     private Long id;
     private String name;
     private String email;
+    private String surname;
+    private String password;
 }
