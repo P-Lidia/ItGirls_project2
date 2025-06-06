@@ -3,6 +3,7 @@ package ru.itgirls.core.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import ru.itgirls.core.entity.UserRole;
 
 @Data
 @Builder
@@ -13,4 +14,5 @@ public class UserRegistrationDto {
     private String email;
     private String surname;
     private String password;
+    private UserRole role;
 }
