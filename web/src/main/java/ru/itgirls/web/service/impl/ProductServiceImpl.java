@@ -14,12 +14,15 @@ public class ProductServiceImpl implements ProductService {
         return productFeignClient.createProduct(createProductDto);
     }
 
-    public ProductDto getProductById(Long id) {
-        return productFeignClient.getProductById(id);
+    public ProductDto getProductById(String name) {
+        return productFeignClient.getProductByName(String name);
     }
 
-    public ProductDto updateProduct(ProductDto productDto) {
-        return  productDto);
+    getProductByName() {
+        return productFeignClient.getProductById(id);
+    }
+    public ProductDto updateProduct(ProductupdateDto productupdateDtoDto) {
+        return productFeignClient.updateProduct(productupdateDtoDto);
     }
 
     public void deleteProduct(Long id) {
