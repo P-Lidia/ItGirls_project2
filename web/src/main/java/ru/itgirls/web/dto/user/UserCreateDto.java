@@ -7,12 +7,11 @@ import lombok.Data;
 @Data
 @Builder
 @AllArgsConstructor
-public class UserRegistrationDto {
-    private Long id;
+public class UserCreateDto {
+
     private String name;
     private String surname;
     private String email;
-    private String password1;
-    private String password2;
+    private String password;
     private UserRole userRole;
 }
