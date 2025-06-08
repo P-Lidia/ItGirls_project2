@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.itgirls.core.dto.product.ProductCreateDto;
 import ru.itgirls.core.dto.product.ProductDto;
 import ru.itgirls.core.dto.product.ProductUpdateDto;
+import ru.itgirls.core.entity.Company;
 import ru.itgirls.core.entity.Product;
+import ru.itgirls.core.mapper.CompanyMapper;
 import ru.itgirls.core.mapper.ProductMapper;
 import ru.itgirls.core.repository.ProductRepository;
 import ru.itgirls.core.service.ProductService;
@@ -20,14 +22,15 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductMapper productMapper;
+    private final CompanyMapper companyMapper;
 
     @Override
-    public ProductDto findById(Long id) {
+    public ProductDto getProductById(Long id) {
         return productMapper.productToDto(findProductById(id));
     }
 
     @Override
-    public ProductDto findByName(String name) {
+    public ProductDto getProductByName(String name) {
         Product product = productRepository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("Product not found."));
         return productMapper.productToDto(product);
@@ -44,9 +47,10 @@ public class ProductServiceImpl implements ProductService {
         Product product = findProductById(productUpdateDto.getId());
         product.setName(productUpdateDto.getName());
         product.setPrice(productUpdateDto.getPrice());
-        product.setCompany(productUpdateDto.getCompany());
-        Product savedProduct = productRepository.save(product);
-        return productMapper.productToDto(savedProduct);
+        Company company = companyMapper.dtoToEntity(productUpdateDto.getCompanyDto());
+        product.setCompany(company);
+        productRepository.save(product);
+        return productMapper.productToDto(product);
     }
 
     @Override
