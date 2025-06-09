@@ -17,5 +17,4 @@ public interface UserRegistrationMapper {
     User toEntity(UserCreateDto dto, @Context PasswordEncoder passwordEncoder);
 
     UserRegistrationDto toDto (User user);
-
 }

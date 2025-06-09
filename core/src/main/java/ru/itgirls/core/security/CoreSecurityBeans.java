@@ -1,4 +1,4 @@
-package ru.itgirls.core.coresecuritybeans;
+package ru.itgirls.core.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

@@ -2,11 +2,11 @@ package ru.itgirls.core.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import ru.itgirls.core.dto.user.UserActivationDto;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import ru.itgirls.core.dto.user.UserCreateDto;
-import ru.itgirls.core.dto.user.UserRegistrationDto;
-import ru.itgirls.core.repository.UserRepository;
 import ru.itgirls.core.service.UserService;
 import ru.itgirls.core.service.email.EmailService;
 
@@ -24,7 +24,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/activate")
-    public void activateUser(@RequestParam String activationKey) {
+    public void activateUser(@RequestBody String activationKey) {
         emailService.activate(activationKey);
     }
 }
