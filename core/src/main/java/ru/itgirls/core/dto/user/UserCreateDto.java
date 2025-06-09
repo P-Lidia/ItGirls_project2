@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.itgirls.core.entity.UserRole;
+import ru.itgirls.core.entity.Role;
 
 @Data
 @Builder
@@ -15,5 +15,5 @@ public class UserCreateDto {
     private String email;
     private String surname;
     private String password;
-    private UserRole role;
+    private Role role;
 }
