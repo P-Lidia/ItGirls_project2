@@ -1,13 +1,21 @@
 package ru.itgirls.web.service;
 
+import ru.itgirls.core.dto.ProductCreateDto;
+import ru.itgirls.core.dto.ProductDto;
+import ru.itgirls.core.dto.ProductUpdateDto;
+
+import java.util.List;
+
 public interface ProductService {
     List<ProductDto> getAllProducts();
 
-    ProductDto <ProductDto> getProductById(Long id);
+    ProductDto getProductById(Long id);
 
-    ProductDto createProduct(ProductDto productDto);
+    ProductDto getProductByName(String name);
 
-    ProductDto updateProduct(Long id, ProductDto productDto);
+    ProductDto createProduct(ProductCreateDto productCreateDto);
+
+    ProductDto updateProduct(ProductUpdateDto productUpdateDto);
 
     void deleteProduct(Long id);
 }
