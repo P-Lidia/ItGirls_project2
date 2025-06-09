@@ -7,7 +7,6 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.itgirls.core.dto.user.UserActivationDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
 import ru.itgirls.core.entity.User;
 import ru.itgirls.core.repository.UserRepository;
@@ -40,21 +39,21 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     @Transactional
-    public void activate(UserActivationDto userActivationDto, String activationKey) {
-        if (keysForLink.containsKey(activationKey)
-                && keysForLink.get(activationKey).equals(userActivationDto.getId())) {
-            User user = userRepository.findById(userActivationDto.getId())
+    public void activate(String activationKey) {
+        if (keysForLink.containsKey(activationKey)) {
+            Long userId = keysForLink.get(activationKey);
+            User user = userRepository.findById(userId)
                     .orElseThrow(() -> new EntityNotFoundException(
-                            String.format("User not found with id: %d", userActivationDto.getId()))
+                            String.format("User not found with id: %d", userId))
                     );
             if (!user.isEnable()) {
                 user.setEnable(true);
                 userRepository.save(user);
                 keysForLink.remove(activationKey);
-                log.info("User {} successfully activated", userActivationDto.getId());
+                log.info("User {} successfully activated", userId);
                 sendEmail(user.getEmail(), buildActivationText(user.getName()));
             } else {
-                log.warn("Activation failed for user {}: invalid or expired key", userActivationDto.getId());
+                log.warn("Activation failed for user {}: invalid or expired key", userId);
             }
         }
     }
