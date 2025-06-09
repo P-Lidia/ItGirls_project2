@@ -1,6 +1,7 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.web.dto.product;
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.web.dto.company.CompanyDto;
 
 import java.math.BigDecimal;
 
@@ -17,12 +19,17 @@ import java.math.BigDecimal;
 @Data
 @Builder
 public class ProductUpdateDto {
+    private Long id;
+
     @Size(min = 2)
     @NotBlank(message = "Please enter the product name")
     private String name;
+
     @DecimalMin(value = "0.01", inclusive = true)
     @NotNull(message = "Please enter the product price")
     private BigDecimal price;
+
     @NotBlank(message = "Please enter the product producer")
-    private String company;
+    @JsonProperty("company")
+    private CompanyDto companyDto;
 }

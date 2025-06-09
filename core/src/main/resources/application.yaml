@@ -1,0 +1,34 @@
+custom:
+  mail:
+    from: no-reply@example.com
+    registration-template: |
+      Hello, %s!
+      To complete your registration, please follow this link:
+      http://localhost:8080/api/auth/activation?key=%s"
+    activation-template: |
+      Welcome, %s! Your account has been successfully activated.
+
+spring:
+  config:
+    import: optional:application-secret.yaml
+  datasource:
+    url: jdbc:postgresql://localhost:5432/project_2
+    username: postgres
+  liquibase:
+    change-log: classpath:/db/baseChangelog.xml
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    protocol: smtp
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+        debug: true
+
+server:
+  port: 8081

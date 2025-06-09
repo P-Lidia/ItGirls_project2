@@ -1,13 +1,13 @@
-package ru.itgirls.core.dto;
+package ru.itgirls.core.dto.product;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.itgirls.core.dto.company.CompanyDto;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -18,5 +18,5 @@ public class ProductDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private String company;
+    private CompanyDto companyDto;
 }

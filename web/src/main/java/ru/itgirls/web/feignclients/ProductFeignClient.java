@@ -3,9 +3,9 @@ package ru.itgirls.web.feignclients;
 import jakarta.validation.Valid;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
-import ru.itgirls.core.dto.ProductCreateDto;
-import ru.itgirls.core.dto.ProductDto;
-import ru.itgirls.core.dto.ProductUpdateDto;
+import ru.itgirls.web.dto.product.ProductCreateDto;
+import ru.itgirls.web.dto.product.ProductDto;
+import ru.itgirls.web.dto.product.ProductUpdateDto;
 
 import java.util.List;
 
