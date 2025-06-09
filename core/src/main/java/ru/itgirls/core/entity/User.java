@@ -28,7 +28,7 @@ public class User {
     private Role role;
 
     @Column(nullable = false)
-    private boolean enable = false;
+    private boolean isEnable = false;
 
     @Column(nullable = false, length = 255)
     private String password;
