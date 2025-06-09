@@ -2,9 +2,10 @@ package ru.itgirls.web.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.itgirls.core.dto.ProductCreateDto;
-import ru.itgirls.core.dto.ProductDto;
-import ru.itgirls.core.dto.ProductUpdateDto;
+
+import ru.itgirls.web.dto.product.ProductCreateDto;
+import ru.itgirls.web.dto.product.ProductDto;
+import ru.itgirls.web.dto.product.ProductUpdateDto;
 import ru.itgirls.web.feignclients.ProductFeignClient;
 import ru.itgirls.web.service.ProductService;
 
@@ -22,7 +23,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDto> getAllProducts() {
-        return List.of();
+        return productFeignClient.getAllProducts();
     }
 
     @Override
@@ -47,6 +48,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void deleteProduct(Long id) {
-        productFeignClient.deleteProduct(id);;
+        productFeignClient.deleteProduct(id);
     }
 }

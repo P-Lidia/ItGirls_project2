@@ -1,8 +1,10 @@
 package ru.itgirls.web.service;
 
-import ru.itgirls.core.dto.ProductCreateDto;
-import ru.itgirls.core.dto.ProductDto;
-import ru.itgirls.core.dto.ProductUpdateDto;
+
+
+import ru.itgirls.web.dto.product.ProductCreateDto;
+import ru.itgirls.web.dto.product.ProductDto;
+import ru.itgirls.web.dto.product.ProductUpdateDto;
 
 import java.util.List;
 
