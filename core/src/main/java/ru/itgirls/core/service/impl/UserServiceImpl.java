@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.itgirls.core.dto.user.UserCreateDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
 import ru.itgirls.core.entity.User;
 import ru.itgirls.core.entity.UserRole;
@@ -26,14 +27,15 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public ResponseEntity<String> registerUser(UserRegistrationDto userRegistrationDto) {
-        if (userRepository.findByEmail(userRegistrationDto.getEmail()).isPresent()) {
+    public ResponseEntity<String> registerUser(UserCreateDto userCreateDto) {
+        if (userRepository.findByEmail(userCreateDto.getEmail()).isPresent()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                     .body("User with this email already exists");
         }
-        User createdUser = mapper.toEntity(userRegistrationDto, passwordEncoder);
+        User createdUser = mapper.toEntity(userCreateDto, passwordEncoder);
         userRepository.save(createdUser);
-        emailService.register(userRegistrationDto);
+        UserRegistrationDto registrationDto = mapper.toDto(createdUser);
+        emailService.register(registrationDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("User is successfully registered");
     }
