@@ -1,7 +1,6 @@
 package ru.itgirls.core.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 @AllArgsConstructor
@@ -24,8 +23,9 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false)
-    private UserRole role;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "userRole_id", nullable = false)
+    private Role role;
 
     @Column(nullable = false)
     private boolean isEnable = false;
