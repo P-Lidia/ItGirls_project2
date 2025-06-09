@@ -15,5 +15,5 @@ public interface UserFeignClient {
     ResponseEntity<String> registerUser(@RequestBody UserCreateDto userCreateDto);
 
     @PostMapping("/activate")
-    void activateUser(String activationKey);
+    void activateUser(@RequestBody String activationKey);
 }
