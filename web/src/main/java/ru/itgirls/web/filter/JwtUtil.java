@@ -5,36 +5,55 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import ru.itgirls.web.model.JwtUser;
+import ru.itgirls.web.dto.user.JwtUserDto;
 
 import java.util.Date;
+import java.util.Set;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    @Value("${jwt.secret}")
-    private final String secret;
+    private static final String ISSUER = "itGirls project app";
+    private static final String SUBJECT = "user details";
+    private static final String CLAIM_USER_ID = "userId";
+    private static final String CLAIM_ROLE = "role";
+    private static final long EXPIRATION_TIME_MS = 60 * 60 * 1000;
 
-    public String generateToken(JwtUser user) {
+    private final Set<String> blackList;
+
+    @Value("${jwt.secret}")
+    private String secret;
+
+    public String generateToken(JwtUserDto user) {
         return JWT.create()
-                .withSubject("user details")
-                .withClaim("userId", user.getId())
-                .withClaim("email", user.getEmail())
-                .withClaim("role", user.getRole())
-                .withIssuer("itGirls project app")
+                .withSubject(SUBJECT)
+                .withClaim(CLAIM_USER_ID, user.getId())
+                .withClaim(CLAIM_ROLE, user.getRole().name())
+                .withIssuer(ISSUER)
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))
                 .sign(Algorithm.HMAC256(secret));
     }
 
     public DecodedJWT verifyToken(String token) {
         JWTVerifier verifier = JWT.require(Algorithm.HMAC256(secret))
-                .withSubject("user details")
-                .withIssuer("itGirls project app")
+                .withSubject(SUBJECT)
+                .withIssuer(ISSUER)
                 .build();
         return verifier.verify(token);
+    }
+
+    public void addToBlackList(String token) {
+        blackList.add(token);
+        log.info("Token added to the blackList");
+    }
+
+    public boolean isNotBlacklisted(String token) {
+        return !blackList.contains(token);
     }
 }
