@@ -2,12 +2,11 @@ package ru.itgirls.web.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
-public class Role {
+public class JwtUser {
     private Long id;
-    private RoleType roleType;
+    private String email;
+    private String role;
 }
