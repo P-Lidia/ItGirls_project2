@@ -8,8 +8,7 @@ import ru.itgirls.web.model.Role;
 @Data
 @Builder
 @AllArgsConstructor
-public class UserRegistrationDto {
-    private Long id;
+public class UserCreateDto {
     private String name;
     private String surname;
     private String email;

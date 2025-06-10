@@ -1,6 +1,6 @@
 custom:
   mail:
-    from: no-reply@example.com
+    from: testitgirlsproject@gmail.com
     registration-template: |
       Hello, %s!
       To complete your registration, please follow this link:
@@ -32,3 +32,8 @@ spring:
 
 server:
   port: 8081
+
+feign:
+  client:
+    user_core:
+      url: http://localhost:8081
