@@ -3,6 +3,7 @@ package ru.itgirls.core.mapper;
 import org.mapstruct.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.itgirls.core.dto.user.UserCreateDto;
+import ru.itgirls.core.dto.user.UserDetailsDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
 import ru.itgirls.core.entity.User;
 
@@ -15,5 +16,7 @@ public interface UserMapper {
     @Mapping(target = "isEnable", constant = "false")
     User toEntity(UserCreateDto userCreateDto, @Context PasswordEncoder passwordEncoder);
 
-    UserRegistrationDto toDto (User user);
+    UserRegistrationDto toUserRegistrationDto(User user);
+
+    UserDetailsDto toUserDetailsDto(User user);
 }

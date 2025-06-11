@@ -6,9 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.itgirls.core.dto.user.AuthUserDto;
 import ru.itgirls.core.dto.user.UserCreateDto;
+import ru.itgirls.core.dto.user.UserDetailsDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
 import ru.itgirls.core.entity.User;
 import ru.itgirls.core.mapper.UserMapper;
@@ -32,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
                     .body("User with this email already exists");
         }
         User createdUser = userMapper.toEntity(userCreateDto, passwordEncoder);
-        UserRegistrationDto registrationDto = userMapper.toDto(userRepository.save(createdUser));
+        UserRegistrationDto registrationDto = userMapper.toUserRegistrationDto(userRepository.save(createdUser));
         emailService.register(registrationDto);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("User is successfully registered");
@@ -44,5 +44,11 @@ public class AuthServiceImpl implements AuthService {
                         "User with email %s not found.".formatted(authUserDto.getEmail())
                 ));
         return passwordEncoder.matches(authUserDto.getPassword(), user.getPassword());
+    }
+
+    public UserDetailsDto findUserById(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("User with id=%s not found.".formatted(id)));
+        return userMapper.toUserDetailsDto(user);
     }
 }
