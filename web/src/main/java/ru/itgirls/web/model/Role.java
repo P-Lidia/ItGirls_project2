@@ -1,7 +1,12 @@
 package ru.itgirls.web.model;
 
-import ru.itgirls.core.entity.RoleType;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
     private Long id;
     private RoleType roleType;
