@@ -11,15 +11,15 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class JwtTokenManager {
 
-//    private final Set<String> blackList;
-//    private final JwtUtil jwtUtil;
-//
-//    public void addToBlackList(String token) {
-//        blackList.add(token);
-//        log.info("Token added to the blackList");
-//    }
-//
-//    public boolean isNotBlacklisted(String token) {
-//        return !blackList.contains(token);
-//    }
+    private final Set<String> blackList;
+    private final JwtUtil jwtUtil;
+
+    public void addToBlackList(String token) {
+        blackList.add(token);
+        log.info("Token added to the blackList");
+    }
+
+    public boolean isNotBlacklisted(String token) {
+        return !blackList.contains(token);
+    }
 }

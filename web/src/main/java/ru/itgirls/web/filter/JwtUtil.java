@@ -47,13 +47,4 @@ public class JwtUtil {
                 .build();
         return verifier.verify(token);
     }
-
-    public void addToBlackList(String token) {
-        blackList.add(token);
-        log.info("Token added to the blackList");
-    }
-
-    public boolean isNotBlacklisted(String token) {
-        return !blackList.contains(token);
-    }
 }

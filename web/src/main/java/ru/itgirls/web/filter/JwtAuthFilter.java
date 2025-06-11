@@ -32,7 +32,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && !authHeader.isBlank() && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7);
-            if (token.isBlank() || !jwtUtil.isNotBlacklisted(token)) {
+            if (token.isBlank() || !jwtTokenManager.isNotBlacklisted(token)) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST,
                         "Token is not valid");
                 return;
@@ -40,7 +40,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             try {
                 DecodedJWT jwt = jwtUtil.verifyToken(token);
                 Long userId = jwt.getClaim("userId").asLong();
-                UserDetails userDetails = userDetailsService.getUserById(userId); // todo надо сделать методы для работы с юзером
+                UserDetails userDetails = userDetailsService.loadUserById(userId);
                 UsernamePasswordAuthenticationToken authToken =
                         new UsernamePasswordAuthenticationToken(
                                 userDetails,

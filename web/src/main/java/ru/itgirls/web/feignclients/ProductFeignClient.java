@@ -9,7 +9,7 @@ import ru.itgirls.web.dto.product.ProductUpdateDto;
 
 import java.util.List;
 
-@FeignClient(name = "product_core", url = "https://localhost:8081")
+@FeignClient(name = "product_core", url = "${feign.client.user_core.url}")
 @RequestMapping("/product")
 public interface ProductFeignClient {
 
