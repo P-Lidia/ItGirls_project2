@@ -8,13 +8,12 @@ import ru.itgirls.core.entity.User;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
-        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE,
-        uses = ProductMapper.class)
-public interface UserRegistrationMapper {
+        nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+public interface UserMapper {
 
-    @Mapping(target = "password", expression = "java(encodePassword(dto.getPassword()))")
+    @Mapping(target = "password", expression = "java(encodePassword(userCreateDto.getPassword()))")
     @Mapping(target = "isEnable", constant = "false")
-    User toEntity(UserCreateDto dto, @Context PasswordEncoder passwordEncoder);
+    User toEntity(UserCreateDto userCreateDto, @Context PasswordEncoder passwordEncoder);
 
     UserRegistrationDto toDto (User user);
 }

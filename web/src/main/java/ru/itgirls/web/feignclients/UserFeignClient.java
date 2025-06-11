@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import ru.itgirls.web.dto.user.UserCreateDto;
 
 @FeignClient(name = "user_core", url = "${feign.client.user_core.url}")
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 public interface UserFeignClient {
 
     @PostMapping("/register")

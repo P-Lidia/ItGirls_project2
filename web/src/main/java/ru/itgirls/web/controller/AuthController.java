@@ -18,7 +18,7 @@ import ru.itgirls.web.service.RegistrationService;
 @RequestMapping("/users")
 @RequiredArgsConstructor
 @Validated
-public class RegistrationController {
+public class AuthController {
 
     private final RegistrationService registrationService;
     private final UserMapper userMapper;
