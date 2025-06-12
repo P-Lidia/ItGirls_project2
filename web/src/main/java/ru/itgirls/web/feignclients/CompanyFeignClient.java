@@ -9,7 +9,7 @@ import ru.itgirls.web.dto.company.CompanyUpdateDto;
 
 import java.util.List;
 
-@FeignClient(name = "company_core", url = "https://localhost:8081")
+@FeignClient(name = "company_core", url = "${feign.client.user_core.url}")
 @RequestMapping("/api/company")
 public interface CompanyFeignClient {
 

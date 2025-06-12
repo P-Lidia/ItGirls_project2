@@ -1,9 +1,14 @@
 package ru.itgirls.core.mapper;
 
-import org.mapstruct.*;
+import org.mapstruct.Context;
+import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
+import org.mapstruct.MappingConstants;
+import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.mapstruct.ReportingPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import ru.itgirls.core.dto.user.JwtUserDto;
 import ru.itgirls.core.dto.user.UserCreateDto;
-import ru.itgirls.core.dto.user.UserDetailsDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
 import ru.itgirls.core.entity.User;
 
@@ -18,5 +23,5 @@ public interface UserMapper {
 
     UserRegistrationDto toUserRegistrationDto(User user);
 
-    UserDetailsDto toUserDetailsDto(User user);
+    JwtUserDto toJwtUserDto(User user);
 }
