@@ -21,7 +21,7 @@ import ru.itgirls.web.service.CompanyService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/companies")
+@RequestMapping("/companies")
 @RequiredArgsConstructor
 public class CompanyController {
 
