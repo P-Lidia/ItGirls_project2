@@ -10,7 +10,7 @@ import ru.itgirls.web.dto.product.ProductUpdateDto;
 import java.util.List;
 
 @FeignClient(name = "product_core", url = "${feign.client.user_core.url}")
-@RequestMapping("/product")
+@RequestMapping("/api/products")
 public interface ProductFeignClient {
 
     @GetMapping("/all")

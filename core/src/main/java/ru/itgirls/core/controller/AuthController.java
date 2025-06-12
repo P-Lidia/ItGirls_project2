@@ -6,25 +6,32 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.itgirls.core.dto.user.AuthUserDto;
+import ru.itgirls.core.dto.user.JwtUserDto;
 import ru.itgirls.core.dto.user.UserCreateDto;
-import ru.itgirls.core.service.UserService;
+import ru.itgirls.core.service.AuthService;
 import ru.itgirls.core.service.email.EmailService;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/auth")
 @RequiredArgsConstructor
-public class RegistrationController {
+public class AuthController {
 
     private final EmailService emailService;
-    private final UserService userService;
+    private final AuthService authService;
 
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody UserCreateDto userCreateDto) {
-        return userService.registerUser(userCreateDto);
+        return authService.registerUser(userCreateDto);
     }
 
     @PostMapping("/activate")
     public void activateUser(@RequestBody String activationKey) {
         emailService.activate(activationKey);
+    }
+
+    @PostMapping("/login")
+    public JwtUserDto authUser(@RequestBody AuthUserDto authUserDto) {
+        return authService.validateUser(authUserDto);
     }
 }

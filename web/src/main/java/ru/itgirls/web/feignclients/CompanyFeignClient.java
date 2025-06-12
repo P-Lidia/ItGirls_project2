@@ -10,7 +10,7 @@ import ru.itgirls.web.dto.company.CompanyUpdateDto;
 import java.util.List;
 
 @FeignClient(name = "company_core", url = "${feign.client.user_core.url}")
-@RequestMapping("/company")
+@RequestMapping("/api/company")
 public interface CompanyFeignClient {
 
     @GetMapping("/all")
