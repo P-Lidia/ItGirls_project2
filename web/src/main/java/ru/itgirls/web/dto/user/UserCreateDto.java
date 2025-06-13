@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import ru.itgirls.web.model.Role;
 
 @Data
-@Builder
 @AllArgsConstructor
 public class UserCreateDto {
     private String name;

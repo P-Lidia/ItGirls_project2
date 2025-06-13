@@ -1,5 +1,10 @@
 server:
   port: 8080
 
+feign:
+  client:
+    user-core:
+      url: http://localhost:8081
+
 jwt:
   secret: u9X!vPz6rJqK3dN$FgLm2Bt@YcWxZ7sHpQeVa1MiTnRbLoC4DxUwGyEkShMzA5n

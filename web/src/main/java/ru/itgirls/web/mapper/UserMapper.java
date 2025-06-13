@@ -10,9 +10,9 @@ import ru.itgirls.web.dto.user.RegistrationRequestDto;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
+        unmappedSourcePolicy = ReportingPolicy.IGNORE,
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
-    @Mapping(target = "confirmPassword", ignore = true)
     UserCreateDto toUserCreateDto(RegistrationRequestDto request);
 }
