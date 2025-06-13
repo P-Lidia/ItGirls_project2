@@ -6,11 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itgirls.core.dto.product.ProductDto;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 public class CompanyCreateDto {
     private String name;
-    private ProductDto productDto;
+    private List<ProductDto> products;
 }

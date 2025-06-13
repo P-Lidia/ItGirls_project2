@@ -32,8 +32,3 @@ spring:
 
 server:
   port: 8081
-
-feign:
-  client:
-    user_core:
-      url: http://localhost:8081

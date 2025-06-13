@@ -14,7 +14,8 @@ public class JwtTokenManager {
     private final Set<String> blackList;
     private final JwtUtil jwtUtil;
 
-    public void addToBlackList(String token) {
+    public void addToBlackList(String authHeader) {
+        String token = authHeader.substring(7);
         blackList.add(token);
         log.info("Token added to the blackList");
     }

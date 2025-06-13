@@ -11,6 +11,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ru.itgirls.web.dto.product.ProductDto;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -20,8 +22,6 @@ public class CompanyCreateDto {
     @NotBlank(message = "Please enter the company name")
     private String name;
 
-    @NotNull(message = "Please enter the produced product")
-    @Valid
-    @JsonProperty("product")
-    private ProductDto productDto;
+    @JsonProperty("products")
+    private List<ProductDto> products;
 }

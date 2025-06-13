@@ -6,14 +6,15 @@ import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.itgirls.web.model.Role;
 import ru.itgirls.web.validation.PasswordMatches;
 
 @Data
-@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @PasswordMatches
-public class UserRequestDto {
+public class RegistrationRequestDto {
 
     @NotBlank(message = "Name must not be blank")
     private String name;

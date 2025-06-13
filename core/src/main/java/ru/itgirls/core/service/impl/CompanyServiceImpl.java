@@ -3,9 +3,11 @@ package ru.itgirls.core.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.itgirls.core.dto.company.CompanyDto;
+import org.springframework.transaction.annotation.Transactional;
 import ru.itgirls.core.dto.company.CompanyCreateDto;
+import ru.itgirls.core.dto.company.CompanyDto;
 import ru.itgirls.core.dto.company.CompanyUpdateDto;
+import ru.itgirls.core.dto.product.ProductDto;
 import ru.itgirls.core.entity.Company;
 import ru.itgirls.core.entity.Product;
 import ru.itgirls.core.mapper.CompanyMapper;
@@ -18,14 +20,15 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
-
 public class CompanyServiceImpl implements CompanyService {
     private final CompanyRepository companyRepository;
     private final CompanyMapper companyMapper;
     private final ProductMapper productMapper;
 
     @Override
-    public CompanyDto getCompanyById(Long id) { return companyMapper.companyToDto(findCompanyById(id)); }
+    public CompanyDto getCompanyById(Long id) {
+        return companyMapper.companyToDto(findCompanyById(id));
+    }
 
     @Override
     public CompanyDto getCompanyByName(String name) {
@@ -54,12 +57,17 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
+    @Transactional
     public CompanyDto updateCompany(CompanyUpdateDto companyUpdateDto) {
         Company company = findCompanyById(companyUpdateDto.getId());
         company.setName(companyUpdateDto.getName());
-        if (companyUpdateDto.getProductDto() != null) {
-            Product product = productMapper.dtoToEntity(companyUpdateDto.getProductDto());
-            company.setProduct(product);
+        List<ProductDto> productDtoList = companyUpdateDto.getProducts();
+        if (productDtoList != null && !productDtoList.isEmpty()) {
+            List<Product> products = productDtoList.stream()
+                    .map(productMapper::dtoToEntity)
+                    .peek(product -> product.setCompany(company))
+                    .toList();
+            company.getProducts().addAll(products);
         }
         companyRepository.save(company);
         return companyMapper.companyToDto(company);

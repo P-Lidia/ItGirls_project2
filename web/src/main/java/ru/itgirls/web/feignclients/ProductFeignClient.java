@@ -9,25 +9,24 @@ import ru.itgirls.web.dto.product.ProductUpdateDto;
 
 import java.util.List;
 
-@FeignClient(name = "product_core", url = "${feign.client.user_core.url}")
-@RequestMapping("/api/products")
+@FeignClient(name = "product-core", url = "${feign.client.user-core.url}")
 public interface ProductFeignClient {
 
-    @GetMapping("/all")
+    @GetMapping("/api/products/all")
     List<ProductDto> getAllProducts();
 
-    @GetMapping("/id/{id}")
+    @GetMapping("/api/products/id/{id}")
     ProductDto getProductById(@PathVariable("id") Long id);
 
-    @GetMapping("/name/{name}")
+    @GetMapping("/api/products/name/{name}")
     ProductDto getProductByName(@PathVariable("name") String name);
 
-    @PostMapping("/create")
+    @PostMapping("/api/products/create")
     ProductDto createProduct(@RequestBody @Valid ProductCreateDto productCreateDto);
 
-    @PutMapping("/update")
+    @PutMapping("/api/products/update")
     ProductDto updateProduct(@RequestBody @Valid ProductUpdateDto productUpdateDto);
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/api/products/delete/{id}")
     void deleteProduct(@PathVariable("id") Long id);
 }
