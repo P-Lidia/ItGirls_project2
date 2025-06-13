@@ -27,11 +27,6 @@ public class CompanyController {
 
     private final CompanyService companyService;
 
-    @Autowired
-    public CompanyController(CompanyService companyService) {
-        this.companyService = companyService;
-    }
-
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public CompanyDto createCompany(@Valid @RequestBody CompanyCreateDto companyCreateDto) {
