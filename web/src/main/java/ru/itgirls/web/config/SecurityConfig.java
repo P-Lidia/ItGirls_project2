@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import ru.itgirls.web.filter.JwtAuthenticationFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -44,14 +45,14 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/products/{id}").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
                         .requestMatchers(HttpMethod.GET, "/products/by-name/{name}").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
                         .requestMatchers(HttpMethod.POST, "/products").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "/products/update").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/products/{id}").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET, "/companies//all-companies").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
+                        .requestMatchers(HttpMethod.PUT, "/products/update").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/products/{id}").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.GET, "/companies/all-companies").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
                         .requestMatchers(HttpMethod.GET, "/companies/{id}").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
                         .requestMatchers(HttpMethod.GET, "/companies/by-name/{name}").hasAnyRole("ADMIN", "CUSTOMER", "MANAGER")
                         .requestMatchers(HttpMethod.POST, "/companies").hasAnyRole("ADMIN", "MANAGER")
-                        .requestMatchers(HttpMethod.PUT, "/companies/update").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/companies/{id}").hasRole("ADMIN")
+                        .requestMatchers(HttpMethod.PUT, "/companies/update").hasAnyRole("ADMIN", "MANAGER")
+                        .requestMatchers(HttpMethod.DELETE, "/companies/{id}").hasAnyRole("ADMIN", "MANAGER")
                         .requestMatchers("/auth/**").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(manager -> manager.sessionCreationPolicy(STATELESS))
