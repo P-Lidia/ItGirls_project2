@@ -3,6 +3,7 @@ package ru.itgirls.web.dto.user;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import ru.itgirls.web.model.Role;
 
 @Data
@@ -12,7 +13,6 @@ public class UserCreateDto {
     private String name;
     private String surname;
     private String email;
-    private String password1;
-    private String password2;
+    private String password;
     private Role role;
 }

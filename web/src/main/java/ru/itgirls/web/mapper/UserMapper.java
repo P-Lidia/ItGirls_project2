@@ -6,7 +6,7 @@ import org.mapstruct.MappingConstants;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 import org.mapstruct.ReportingPolicy;
 import ru.itgirls.web.dto.user.UserCreateDto;
-import ru.itgirls.web.dto.user.UserRequestDto;
+import ru.itgirls.web.dto.user.RegistrationRequestDto;
 
 @Mapper(componentModel = MappingConstants.ComponentModel.SPRING,
         unmappedTargetPolicy = ReportingPolicy.IGNORE,
@@ -14,5 +14,5 @@ import ru.itgirls.web.dto.user.UserRequestDto;
 public interface UserMapper {
 
     @Mapping(target = "confirmPassword", ignore = true)
-    UserCreateDto toUserCreateDto(UserRequestDto request);
+    UserCreateDto toUserCreateDto(RegistrationRequestDto request);
 }

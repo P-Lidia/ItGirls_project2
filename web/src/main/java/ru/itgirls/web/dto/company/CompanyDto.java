@@ -19,6 +19,6 @@ public class CompanyDto {
     private Long id;
     private String name;
 
-    @JsonProperty("product")
+    @JsonProperty("products")
     private List<ProductDto> products;
-    }
+}

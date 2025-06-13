@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import ru.itgirls.web.dto.user.AuthRequestDto;
 import ru.itgirls.web.dto.user.AuthResponseDto;
-import ru.itgirls.web.dto.user.UserRequestDto;
+import ru.itgirls.web.dto.user.RegistrationRequestDto;
 import ru.itgirls.web.mapper.UserMapper;
 import ru.itgirls.web.service.AuthService;
 import ru.itgirls.web.service.RegistrationService;
@@ -28,7 +28,7 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/register")
-    public ResponseEntity<String> register(@RequestBody @Valid UserRequestDto request) {
+    public ResponseEntity<String> register(@RequestBody @Valid RegistrationRequestDto request) {
         return registrationService.register(userMapper.toUserCreateDto(request));
     }
 
