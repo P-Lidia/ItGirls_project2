@@ -8,6 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,9 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import ru.itgirls.web.model.RoleType;
 
 import java.io.IOException;
+import java.util.Collections;
+
+import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Component
 @RequiredArgsConstructor
@@ -43,7 +47,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Long userId = jwt.getClaim("userId").asLong();
         RoleType userRole = RoleType.valueOf(jwt.getClaim("role").asString());
         UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userId, userRole);
+                authentication = new UsernamePasswordAuthenticationToken(userId, null, Collections.singleton(new SimpleGrantedAuthority(userRole.name())));
         context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);
+        filterChain.doFilter(request, response);
     }
 }
