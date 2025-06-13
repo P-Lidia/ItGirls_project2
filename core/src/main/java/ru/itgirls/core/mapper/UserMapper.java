@@ -18,7 +18,7 @@ import ru.itgirls.core.entity.User;
 public interface UserMapper {
 
     @Mapping(target = "password", expression = "java(passwordEncoder.encode(userCreateDto.getPassword()))")
-    @Mapping(target = "isEnable", constant = "false")
+    @Mapping(target = "enable", constant = "false")
     User toEntity(UserCreateDto userCreateDto, @Context PasswordEncoder passwordEncoder);
 
     UserRegistrationDto toUserRegistrationDto(User user);
