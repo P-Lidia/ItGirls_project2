@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CompanyDto {
     private Long id;
     private String name;

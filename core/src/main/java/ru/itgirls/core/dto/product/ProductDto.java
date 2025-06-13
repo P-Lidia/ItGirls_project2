@@ -13,7 +13,6 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @Data
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ProductDto {
     private Long id;
     private String name;
