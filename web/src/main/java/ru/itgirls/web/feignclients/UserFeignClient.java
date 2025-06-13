@@ -5,6 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import ru.itgirls.web.dto.user.AuthRequestDto;
+import ru.itgirls.web.dto.user.JwtUserDto;
 import ru.itgirls.web.dto.user.UserCreateDto;
 
 @FeignClient(name = "user_core", url = "${feign.client.user_core.url}")
@@ -16,4 +18,7 @@ public interface UserFeignClient {
 
     @PostMapping("/activate")
     void activateUser(@RequestBody String activationKey);
+
+    @PostMapping("/login")
+    JwtUserDto validateUser(@RequestBody AuthRequestDto request);
 }
