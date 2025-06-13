@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ru.itgirls.core.dto.user.AuthUserDto;
+import ru.itgirls.core.dto.user.AuthRequestDto;
 import ru.itgirls.core.dto.user.JwtUserDto;
 import ru.itgirls.core.dto.user.UserCreateDto;
 import ru.itgirls.core.dto.user.UserRegistrationDto;
@@ -38,13 +38,13 @@ public class AuthServiceImpl implements AuthService {
                 .body("User is successfully registered");
     }
 
-    public JwtUserDto validateUser(AuthUserDto authUserDto) {
-        User user = userRepository.findByEmail(authUserDto.getEmail())
+    public JwtUserDto validateUser(AuthRequestDto authRequestDto) {
+        User user = userRepository.findByEmail(authRequestDto.getEmail())
                 .orElseThrow(() -> new EntityNotFoundException(
-                        "User with email %s not found.".formatted(authUserDto.getEmail())
+                        "User with email %s not found.".formatted(authRequestDto.getEmail())
                 ));
-        if (!passwordEncoder.matches(authUserDto.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid password for user %s".formatted(authUserDto.getEmail()));
+        if (!passwordEncoder.matches(authRequestDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid password for user %s".formatted(authRequestDto.getEmail()));
         }
         return userMapper.toJwtUserDto(user);
     }

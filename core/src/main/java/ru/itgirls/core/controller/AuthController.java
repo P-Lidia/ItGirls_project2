@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itgirls.core.dto.user.AuthUserDto;
+import ru.itgirls.core.dto.user.AuthRequestDto;
 import ru.itgirls.core.dto.user.JwtUserDto;
 import ru.itgirls.core.dto.user.UserCreateDto;
 import ru.itgirls.core.service.AuthService;
@@ -31,7 +31,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public JwtUserDto authUser(@RequestBody AuthUserDto authUserDto) {
-        return authService.validateUser(authUserDto);
+    public JwtUserDto authUser(@RequestBody AuthRequestDto authRequestDto) {
+        return authService.validateUser(authRequestDto);
     }
 }
