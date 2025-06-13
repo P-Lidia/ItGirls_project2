@@ -3,8 +3,8 @@ package ru.itgirls.core.service.impl;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import ru.itgirls.core.dto.company.CompanyDto;
 import ru.itgirls.core.dto.company.CompanyCreateDto;
+import ru.itgirls.core.dto.company.CompanyDto;
 import ru.itgirls.core.dto.company.CompanyUpdateDto;
 import ru.itgirls.core.entity.Company;
 import ru.itgirls.core.entity.Product;
@@ -25,7 +25,9 @@ public class CompanyServiceImpl implements CompanyService {
     private final ProductMapper productMapper;
 
     @Override
-    public CompanyDto getCompanyById(Long id) { return companyMapper.companyToDto(findCompanyById(id)); }
+    public CompanyDto getCompanyById(Long id) {
+        return companyMapper.companyToDto(findCompanyById(id));
+    }
 
     @Override
     public CompanyDto getCompanyByName(String name) {
@@ -59,7 +61,7 @@ public class CompanyServiceImpl implements CompanyService {
         company.setName(companyUpdateDto.getName());
         if (companyUpdateDto.getProductDto() != null) {
             Product product = productMapper.dtoToEntity(companyUpdateDto.getProductDto());
-            company.setProduct(product);
+            company.getProducts().add(product);
         }
         companyRepository.save(company);
         return companyMapper.companyToDto(company);

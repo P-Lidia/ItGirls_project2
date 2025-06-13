@@ -17,11 +17,12 @@ import ru.itgirls.core.entity.User;
         nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface UserMapper {
 
-    @Mapping(target = "password", expression = "java(encodePassword(userCreateDto.getPassword()))")
+    @Mapping(target = "password", expression = "java(passwordEncoder.encode(userCreateDto.getPassword()))")
     @Mapping(target = "isEnable", constant = "false")
     User toEntity(UserCreateDto userCreateDto, @Context PasswordEncoder passwordEncoder);
 
     UserRegistrationDto toUserRegistrationDto(User user);
 
+    @Mapping(target = "role", source = "role.roleType")
     JwtUserDto toJwtUserDto(User user);
 }
