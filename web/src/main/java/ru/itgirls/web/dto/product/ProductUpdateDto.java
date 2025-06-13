@@ -29,7 +29,6 @@ public class ProductUpdateDto {
     @NotNull(message = "Please enter the product price")
     private BigDecimal price;
 
-    @NotBlank(message = "Please enter the product producer")
     @JsonProperty("company")
     private CompanyDto companyDto;
 }
