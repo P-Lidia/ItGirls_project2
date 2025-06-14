@@ -36,11 +36,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         final String token = header.substring(BEARER_PREFIX.length());
-        if (token.isBlank() || jwtTokenManager.isNotBlacklisted(token)) {
+        if (token.isBlank() || !jwtTokenManager.isNotBlacklisted(token)) {
             response.sendError(HttpServletResponse.SC_FORBIDDEN, "Token is invalid or blacklisted");
+            return;
         }
         DecodedJWT jwt = jwtUtil.verifyToken(token);
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
         Long userId = jwt.getClaim("userId").asLong();
         String userRole = jwt.getClaim("role").asString();
         UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
@@ -48,6 +48,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 null,
                 Collections.singleton(new SimpleGrantedAuthority(userRole))
         );
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
         filterChain.doFilter(request, response);

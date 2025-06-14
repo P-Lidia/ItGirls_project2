@@ -42,7 +42,7 @@ public class AuthController {
         return authService.login(request);
     }
 
-    @PostMapping("logout")
+    @PostMapping("/logout")
     public ResponseEntity<Void> logout(@RequestHeader("Authorization") String authHeader) {
         authService.logout(authHeader);
         return ResponseEntity
