@@ -33,8 +33,8 @@ public class AuthController {
     }
 
     @GetMapping("/activate")
-    public void activate(@RequestParam @NonNull String key) {
-        authService.activate(key);
+    public ResponseEntity<String> activate(@RequestParam @NonNull String key) {
+        return authService.activate(key);
     }
 
     @PostMapping("/login")
