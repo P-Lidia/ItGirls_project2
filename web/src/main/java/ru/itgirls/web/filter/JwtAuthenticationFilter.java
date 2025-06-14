@@ -13,12 +13,9 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.itgirls.web.model.RoleType;
 
 import java.io.IOException;
 import java.util.Collections;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Component
 @RequiredArgsConstructor
@@ -45,9 +42,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         DecodedJWT jwt = jwtUtil.verifyToken(token);
         SecurityContext context = SecurityContextHolder.createEmptyContext();
         Long userId = jwt.getClaim("userId").asLong();
-        RoleType userRole = RoleType.valueOf(jwt.getClaim("role").asString());
-        UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userId, null, Collections.singleton(new SimpleGrantedAuthority(userRole.name())));
+        String userRole = jwt.getClaim("role").asString();
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                userId,
+                null,
+                Collections.singleton(new SimpleGrantedAuthority(userRole))
+        );
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
         filterChain.doFilter(request, response);

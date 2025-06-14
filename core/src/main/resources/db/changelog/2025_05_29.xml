@@ -18,11 +18,6 @@
             name varchar NOT NULL
             );
 
-            Create table if not exists userRole (
-            id bigserial PRIMARY KEY,
-            name varchar NOT NULL
-            );
-
             Create table if not exists company_product (
             product_id bigint NOT NULL,
             company_id bigint NOT NULL,
@@ -30,16 +25,14 @@
             FOREIGN KEY (company_id) REFERENCES company (id)
             );
 
-
             Create table if not exists users (
             id bigserial PRIMARY KEY,
             name varchar NOT NULL,
             surname varchar,
             email varchar NOT NULL UNIQUE,
-            userRole_id bigint NOT NULL,
+            role varchar NOT NULL,
             enabled boolean NOT NULL DEFAULT FALSE,
-            password varchar(255) NOT NULL,
-            FOREIGN KEY (userRole_id) REFERENCES userRole (id)
+            password varchar(255) NOT NULL
             );
 
             Insert into product(name, price) values
@@ -65,15 +58,10 @@
             ('paperclip'),
             ('crystal goose');
 
-            Insert into userRole(name) values
-            ('ROLE_CUSTOMER'),
-            ('ROLE_MANAGER'),
-            ('ROLE_ADMIN');
-
-            Insert into users(name, surname, email, userRole_id, enabled, password) values
-            ('Admin', '', 'admin@example.com', 3, TRUE, '$2a$12$XiNkMMp4Omb5/4FVsTPOj.egeQGQW7QxHOQ8UXSmn4msCFudYen26'),
-            ('User', '', 'user@example.com', 1, FALSE, '$2a$12$YLg22j519cmMPRlpY4jbqundladwRQWgzFsNoGlcGue3Q/h7SeBcy'),
-            ('Manager', '', 'manager@example.com', 2, FALSE, '$2a$12$xf4EJgF2fnEy3PtdY6yJmuHQGRob6Xkb41s.EPRKXg.FJ4AKk/O1e');
+            Insert into users(name, surname, email,  role, enabled, password) values
+            ('Admin', '', 'admin@example.com', 'ROLE_ADMIN', TRUE, '$2a$12$XiNkMMp4Omb5/4FVsTPOj.egeQGQW7QxHOQ8UXSmn4msCFudYen26'),
+            ('User', '', 'user@example.com', 'ROLE_USER', FALSE, '$2a$12$YLg22j519cmMPRlpY4jbqundladwRQWgzFsNoGlcGue3Q/h7SeBcy'),
+            ('Manager', '', 'manager@example.com', 'ROLE_MANAGER', FALSE, '$2a$12$xf4EJgF2fnEy3PtdY6yJmuHQGRob6Xkb41s.EPRKXg.FJ4AKk/O1e');
 
             Insert into company_product(product_id, company_id) values
             (1, 1),

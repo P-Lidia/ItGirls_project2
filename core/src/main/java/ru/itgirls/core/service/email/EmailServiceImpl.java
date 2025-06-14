@@ -42,7 +42,7 @@ public class EmailServiceImpl implements EmailService {
                     .orElseThrow(() -> new EntityNotFoundException(
                             String.format("User not found with id: %d", userId))
                     );
-            user.setEnable(true);
+            user.setEnabled(true);
             userRepository.save(user);
             keysForLink.remove(activationKey);
             log.info("User {} successfully activated", userId);

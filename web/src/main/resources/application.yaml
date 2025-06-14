@@ -8,3 +8,7 @@ feign:
 
 jwt:
   secret: u9X!vPz6rJqK3dN$FgLm2Bt@YcWxZ7sHpQeVa1MiTnRbLoC4DxUwGyEkShMzA5n
+
+logging:
+  level:
+    org.springframework.security: DEBUG
