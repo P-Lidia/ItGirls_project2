@@ -37,7 +37,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void logout(String authHeader) {
-        jwtTokenManager.addToBlackList(authHeader);
+    public ResponseEntity<String> logout(String authHeader) {
+        return jwtTokenManager.addToBlackList(authHeader);
     }
 }

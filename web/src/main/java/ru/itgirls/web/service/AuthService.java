@@ -13,5 +13,5 @@ public interface AuthService {
 
     AuthResponseDto login(AuthRequestDto request);
 
-    void logout(String authHeader);
+    ResponseEntity<String> logout(String authHeader);
 }

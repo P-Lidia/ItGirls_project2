@@ -37,7 +37,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         }
         final String token = header.substring(BEARER_PREFIX.length());
         if (token.isBlank() || !jwtTokenManager.isNotBlacklisted(token)) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Token is invalid or blacklisted");
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\":\"Token is invalid or blacklisted\"}");
+            response.getWriter().flush();
             return;
         }
         DecodedJWT jwt = jwtUtil.verifyToken(token);
