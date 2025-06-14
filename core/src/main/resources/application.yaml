@@ -1,19 +1,14 @@
-custom:
-  mail:
-    from: testitgirlsproject@gmail.com
-    registration-template: |
-      Hello, %s!
-      To complete your registration, please follow this link:
-      http://localhost:8080/api/auth/activation?key=%s"
-    activation-template: |
-      Welcome, %s! Your account has been successfully activated.
-
 spring:
+  application:
+    name: user-core
+
   config:
     import: optional:application-secret.yaml
+
   datasource:
     url: jdbc:postgresql://localhost:5432/project_2
     username: postgres
+
   liquibase:
     change-log: classpath:/db/baseChangelog.xml
 
@@ -29,6 +24,16 @@ spring:
           starttls:
             enable: true
         debug: true
+
+custom:
+  mail:
+    from: testitgirlsproject@gmail.com
+    registration-template: |
+      Hello, %s!
+      To complete your registration, please follow this link:
+      http://localhost:8080/auth/activate?key=%s
+    activation-template: |
+      Welcome, %s! Your account has been successfully activated.
 
 server:
   port: 8081

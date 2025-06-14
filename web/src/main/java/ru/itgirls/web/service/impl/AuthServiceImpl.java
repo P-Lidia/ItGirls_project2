@@ -7,7 +7,7 @@ import ru.itgirls.web.dto.user.AuthRequestDto;
 import ru.itgirls.web.dto.user.AuthResponseDto;
 import ru.itgirls.web.dto.user.JwtUserDto;
 import ru.itgirls.web.dto.user.UserCreateDto;
-import ru.itgirls.web.feignclients.UserFeignClient;
+import ru.itgirls.web.feignclients.AuthFeignClient;
 import ru.itgirls.web.filter.JwtTokenManager;
 import ru.itgirls.web.filter.JwtUtil;
 import ru.itgirls.web.service.AuthService;
@@ -15,29 +15,29 @@ import ru.itgirls.web.service.AuthService;
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
-    private final UserFeignClient userFeignClient;
+    private final AuthFeignClient authFeignClient;
     private final JwtTokenManager jwtTokenManager;
     private final JwtUtil jwtUtil;
 
     @Override
     public ResponseEntity<String> register(UserCreateDto userCreateDto) {
-        return userFeignClient.registerUser(userCreateDto);
+        return authFeignClient.registerUser(userCreateDto);
     }
 
     @Override
-    public void activate(String activationKey) {
-        userFeignClient.activateUser(activationKey);
+    public ResponseEntity<String> activate(String activationKey) {
+        return authFeignClient.activateUser(activationKey);
     }
 
     @Override
     public AuthResponseDto login(AuthRequestDto request) {
-        JwtUserDto jwtUserDto = userFeignClient.validateUser(request);
+        JwtUserDto jwtUserDto = authFeignClient.validateUser(request);
         String token = jwtUtil.generateToken(jwtUserDto);
         return new AuthResponseDto(token);
     }
 
     @Override
-    public void logout(String authHeader) {
-        jwtTokenManager.addToBlackList(authHeader);
+    public ResponseEntity<String> logout(String authHeader) {
+        return jwtTokenManager.addToBlackList(authHeader);
     }
 }

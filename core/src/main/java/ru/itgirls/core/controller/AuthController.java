@@ -26,8 +26,8 @@ public class AuthController {
     }
 
     @PostMapping("/activate")
-    public void activateUser(@RequestBody String activationKey) {
-        emailService.activate(activationKey);
+    public ResponseEntity<String> activateUser(@RequestBody String activationKey) {
+        return emailService.activate(activationKey);
     }
 
     @PostMapping("/login")

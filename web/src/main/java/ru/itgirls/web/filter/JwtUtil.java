@@ -33,7 +33,7 @@ public class JwtUtil {
         return JWT.create()
                 .withSubject(SUBJECT)
                 .withClaim(CLAIM_USER_ID, user.getId())
-                .withClaim(CLAIM_ROLE, user.getRole().name())
+                .withClaim(CLAIM_ROLE, user.getRole())
                 .withIssuer(ISSUER)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME_MS))

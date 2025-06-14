@@ -3,6 +3,8 @@ package ru.itgirls.core.service.email;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -35,20 +37,24 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void activate(String activationKey) {
+    public ResponseEntity<String> activate(String activationKey) {
         if (keysForLink.containsKey(activationKey)) {
             Long userId = keysForLink.get(activationKey);
             User user = userRepository.findById(userId)
                     .orElseThrow(() -> new EntityNotFoundException(
                             String.format("User not found with id: %d", userId))
                     );
-            user.setEnable(true);
+            user.setEnabled(true);
             userRepository.save(user);
             keysForLink.remove(activationKey);
             log.info("User {} successfully activated", userId);
             sendEmail(user.getEmail(), buildActivationText(user.getName()));
+            return ResponseEntity.ok("Account successfully activated!");
         } else {
-            log.warn("Activation failed: invalid or expired key");
+            log.warn("Activation failed: invalid key");
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Activation failed: invalid key.");
         }
     }
 

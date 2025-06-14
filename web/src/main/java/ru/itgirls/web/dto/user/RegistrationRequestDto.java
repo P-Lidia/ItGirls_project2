@@ -4,10 +4,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ru.itgirls.web.model.Role;
 import ru.itgirls.web.validation.PasswordMatches;
 
 @Data
@@ -34,5 +32,5 @@ public class RegistrationRequestDto {
     private String confirmPassword;
 
     @NotNull(message = "User role must not be null")
-    private Role role;
+    private String role;
 }

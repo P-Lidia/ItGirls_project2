@@ -9,13 +9,13 @@ import ru.itgirls.web.dto.user.JwtUserDto;
 import ru.itgirls.web.dto.user.UserCreateDto;
 
 @FeignClient(name = "auth-core", url = "${feign.client.user-core.url}")
-public interface UserFeignClient {
+public interface AuthFeignClient {
 
     @PostMapping("/api/auth/register")
     ResponseEntity<String> registerUser(@RequestBody UserCreateDto userCreateDto);
 
     @PostMapping("/api/auth/activate")
-    void activateUser(@RequestBody String activationKey);
+    ResponseEntity<String> activateUser(@RequestBody String activationKey);
 
     @PostMapping("/api/auth/login")
     JwtUserDto validateUser(@RequestBody AuthRequestDto request);

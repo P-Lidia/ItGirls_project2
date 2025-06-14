@@ -9,9 +9,9 @@ public interface AuthService {
 
     ResponseEntity<String> register(UserCreateDto userCreateDto);
 
-    void activate(String activationKey);
+    ResponseEntity<String> activate(String activationKey);
 
     AuthResponseDto login(AuthRequestDto request);
 
-    void logout(String authHeader);
+    ResponseEntity<String> logout(String authHeader);
 }

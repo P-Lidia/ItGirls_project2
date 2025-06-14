@@ -13,12 +13,9 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-import ru.itgirls.web.model.RoleType;
 
 import java.io.IOException;
 import java.util.Collections;
-
-import static com.fasterxml.jackson.databind.type.LogicalType.Collection;
 
 @Component
 @RequiredArgsConstructor
@@ -39,15 +36,22 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
         final String token = header.substring(BEARER_PREFIX.length());
-        if (token.isBlank() || jwtTokenManager.isNotBlacklisted(token)) {
-            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Token is invalid or blacklisted");
+        if (token.isBlank() || !jwtTokenManager.isNotBlacklisted(token)) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            response.setContentType("application/json");
+            response.getWriter().write("{\"error\":\"Token is invalid or blacklisted\"}");
+            response.getWriter().flush();
+            return;
         }
         DecodedJWT jwt = jwtUtil.verifyToken(token);
-        SecurityContext context = SecurityContextHolder.createEmptyContext();
         Long userId = jwt.getClaim("userId").asLong();
-        RoleType userRole = RoleType.valueOf(jwt.getClaim("role").asString());
-        UsernamePasswordAuthenticationToken
-                authentication = new UsernamePasswordAuthenticationToken(userId, null, Collections.singleton(new SimpleGrantedAuthority(userRole.name())));
+        String userRole = jwt.getClaim("role").asString();
+        UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                userId,
+                null,
+                Collections.singleton(new SimpleGrantedAuthority(userRole))
+        );
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
         context.setAuthentication(authentication);
         SecurityContextHolder.setContext(context);
         filterChain.doFilter(request, response);

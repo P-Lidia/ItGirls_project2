@@ -5,6 +5,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -31,9 +32,9 @@ public class AuthController {
         return authService.register(userMapper.toUserCreateDto(request));
     }
 
-    @PostMapping("/activation")
-    public void activate(@RequestParam @NonNull String activationKey) {
-        authService.activate(activationKey);
+    @GetMapping("/activate")
+    public ResponseEntity<String> activate(@RequestParam @NonNull String key) {
+        return authService.activate(key);
     }
 
     @PostMapping("/login")
@@ -41,11 +42,8 @@ public class AuthController {
         return authService.login(request);
     }
 
-    @PostMapping("logout")
-    public ResponseEntity<Void> logout(@RequestHeader("Authorization") String authHeader) {
-        authService.logout(authHeader);
-        return ResponseEntity
-                .ok()
-                .build();
+    @PostMapping("/logout")
+    public ResponseEntity<String> logout(@RequestHeader("Authorization") String authHeader) {
+        return authService.logout(authHeader);
     }
 }
