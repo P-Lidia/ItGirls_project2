@@ -71,7 +71,7 @@
             ('ROLE_ADMIN');
 
             Insert into users(name, surname, email, userRole_id, enabled, password) values
-            ('Admin', '', 'admin@example.com', 3, TRUE, '$2a$12$mvuhZJYSYuveuHLwwYTho.vUfmqTnjTOIE9JEs0HbSY4tp6JLARUC'),
+            ('Admin', '', 'admin@example.com', 3, TRUE, '$2a$12$XiNkMMp4Omb5/4FVsTPOj.egeQGQW7QxHOQ8UXSmn4msCFudYen26'),
             ('User', '', 'user@example.com', 1, FALSE, '$2a$12$YLg22j519cmMPRlpY4jbqundladwRQWgzFsNoGlcGue3Q/h7SeBcy'),
             ('Manager', '', 'manager@example.com', 2, FALSE, '$2a$12$xf4EJgF2fnEy3PtdY6yJmuHQGRob6Xkb41s.EPRKXg.FJ4AKk/O1e');
 
